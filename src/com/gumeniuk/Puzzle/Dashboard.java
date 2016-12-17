@@ -1,5 +1,6 @@
 package com.gumeniuk.Puzzle;
 
+import com.gumeniuk.Puzzle.Builders.MenuBarBuilder;
 import com.gumeniuk.Puzzle.Builders.MenuBuilder;
 import com.gumeniuk.Puzzle.Builders.MenuItemBuilder;
 
@@ -39,26 +40,35 @@ public class Dashboard extends AbstractFrame {
     }
 
     private Component createMenu() {
+//        ActionListener listener = getActionListenerImpl();
 
+        MenuBarBuilder menuBarBuilder = new MenuBarBuilder(getActionListenerImpl());
+        menuBarBuilder.menu("File")
+                .add("New game")
+                .add("Exit", "control Q");
 
-        ActionListener listener = getActionListenerImpl();
-        JMenuBar menuBar = new JMenuBar();
+        menuBarBuilder.menu("help")
+                .add("About");
 
-        menuBar.add(
-                new MenuBuilder("File", listener)
-                        .add("New game")
-                        .add("Exit", "control Q")
-                        .build()
-        );
+        return menuBarBuilder.build();
 
-        menuBar.add(
-                new MenuBuilder("Help", listener)
-                        .add("About")
-                        .build()
-        );
-
-
-        return menuBar;
+//        JMenuBar menuBar = new JMenuBar();
+//
+//        menuBar.add(
+//                new MenuBuilder("File", listener)
+//                        .add("New game")
+//                        .add("Exit", "control Q")
+//                        .build()
+//        );
+//
+//        menuBar.add(
+//                new MenuBuilder("Help", listener)
+//                        .add("About")
+//                        .build()
+//        );
+//
+//
+//        return menuBar;
     }
 
     private Component createGameField() {
