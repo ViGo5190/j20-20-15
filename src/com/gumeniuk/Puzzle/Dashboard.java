@@ -1,5 +1,8 @@
 package com.gumeniuk.Puzzle;
 
+import com.gumeniuk.Puzzle.Builders.MenuBuilder;
+import com.gumeniuk.Puzzle.Builders.MenuItemBuilder;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -36,23 +39,50 @@ public class Dashboard extends AbstractFrame {
     }
 
     private Component createMenu() {
+
+
         ActionListener listener = getActionListenerImpl();
         JMenuBar menuBar = new JMenuBar();
 
-        JMenu file = new JMenu("File");
+//        JMenu file = new JMenu("File");
+//
+////        JMenuItem item = new JMenuItem("New game");
+////        item.addActionListener(listener);
+////
+////        file.add(item);
+//
+//        MenuItemBuilder builder = new MenuItemBuilder();
+//
+//        builder.addListener(listener);
+//        file.add(
+//            builder
+//                .setText("New game")
+//                .build()
+//        );
+//
+//        file.add(
+//                builder
+//                        .setText("Exit")
+//                        .setAccelerator("control Q")
+//                        .build()
+//        );
+//
+////        JMenuItem itemExit = new JMenuItem("Exit");
+////        itemExit.setAccelerator(KeyStroke.getKeyStroke("control Q"));
+////        itemExit.addActionListener(listener);
+////
+////        file.add(itemExit);
 
-        JMenuItem item = new JMenuItem("New game");
-        item.addActionListener(listener);
+        menuBar.add(
+                new MenuBuilder("File", listener)
+                        .add("New game")
+                        .add("Exit", "control Q")
+                        .build()
+        );
 
-        file.add(item);
 
-        JMenuItem itemExit = new JMenuItem("Exit");
-        itemExit.setAccelerator(KeyStroke.getKeyStroke("control Q"));
-        itemExit.addActionListener(listener);
-
-        file.add(itemExit);
-
-        menuBar.add(file);
+//        menuBar.add(file);
+//        menuBar.add(builder.build());
         return menuBar;
     }
 
