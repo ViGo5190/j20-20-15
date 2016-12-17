@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.PLAIN_MESSAGE;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.UIManager.setLookAndFeel;
 import static javax.swing.UIManager.getSystemLookAndFeelClassName;
 
@@ -75,5 +78,13 @@ public abstract class AbstractFrame extends JFrame {
         } catch (UnsupportedLookAndFeelException | ReflectiveOperationException ignore) {
 
         }
+    }
+
+    protected void showError(String title, String message) {
+        showMessageDialog(this, message, title, ERROR_MESSAGE);
+    }
+
+    protected void showMessage(String title, String message) {
+        showMessageDialog(this, message, title, PLAIN_MESSAGE);
     }
 }

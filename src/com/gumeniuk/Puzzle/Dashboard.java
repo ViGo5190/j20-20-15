@@ -53,7 +53,19 @@ public class Dashboard extends AbstractFrame {
         GameButton button = (GameButton) src;
         if (button.canMoveTo(empty)) {
             empty = button.moveTo(empty);
+            if (hasWin()){
+                showMessage("Congratulations", "You won!");
+                shuffle.run();
+            }
         }
+    }
 
+    private boolean hasWin() {
+        for (GameButton btn : buttons) {
+            if (!btn.hasValidPosition()) {
+                return false;
+            }
+        }
+        return true;
     }
 }
