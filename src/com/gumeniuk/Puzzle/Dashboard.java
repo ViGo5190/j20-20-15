@@ -40,8 +40,6 @@ public class Dashboard extends AbstractFrame {
     }
 
     private Component createMenu() {
-//        ActionListener listener = getActionListenerImpl();
-
         MenuBarBuilder menuBarBuilder = new MenuBarBuilder(getActionListenerImpl());
         menuBarBuilder.menu("File")
                 .add("New game")
@@ -51,24 +49,6 @@ public class Dashboard extends AbstractFrame {
                 .add("About");
 
         return menuBarBuilder.build();
-
-//        JMenuBar menuBar = new JMenuBar();
-//
-//        menuBar.add(
-//                new MenuBuilder("File", listener)
-//                        .add("New game")
-//                        .add("Exit", "control Q")
-//                        .build()
-//        );
-//
-//        menuBar.add(
-//                new MenuBuilder("Help", listener)
-//                        .add("About")
-//                        .build()
-//        );
-//
-//
-//        return menuBar;
     }
 
     private Component createGameField() {
