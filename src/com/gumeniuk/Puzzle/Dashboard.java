@@ -51,6 +51,12 @@ public class Dashboard extends AbstractFrame {
                         .build()
         );
 
+        menuBar.add(
+                new MenuBuilder("Help", listener)
+                        .add("About")
+                        .build()
+        );
+
 
         return menuBar;
     }
