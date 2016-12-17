@@ -5,11 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Collection;
 
 public class Dashboard extends AbstractFrame {
 
-    private final Collection<GameButton> buttons;
+    private final List<GameButton> buttons;
+    private final Runnable shuffle;
 
     private int empty = 15;
 
@@ -20,6 +22,9 @@ public class Dashboard extends AbstractFrame {
         for (int i = 0; i < 15; i++) {
             buttons.add(new GameButton(i, listener));
         }
+
+        shuffle = new Shuffle(buttons);
+        shuffle.run();
     }
 
     public static void main(String[] args) {
