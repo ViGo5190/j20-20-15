@@ -4,8 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import static javax.swing.UIManager.setLookAndFeel;
+import static javax.swing.UIManager.getSystemLookAndFeelClassName;
+
 public abstract class AbstractFrame extends JFrame {
+
+    private final ActionListenerImpl actionListenerImpl;
+
     public AbstractFrame() throws HeadlessException {
+
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setLocationByPlatform(true);
         actionListenerImpl = new ActionListenerImpl();
 
         WindowEventListener windowEventListener = new WindowEventListener();
@@ -42,8 +51,6 @@ public abstract class AbstractFrame extends JFrame {
 
     }
 
-    private final ActionListenerImpl actionListenerImpl;
-
     public ActionListenerImpl getActionListenerImpl() {
         return actionListenerImpl;
     }
@@ -60,5 +67,13 @@ public abstract class AbstractFrame extends JFrame {
 
     protected void onButtonClick(JButton btn) {
 
+    }
+
+    protected static void initLookAndFeel() {
+        try {
+            setLookAndFeel(getSystemLookAndFeelClassName());
+        } catch (UnsupportedLookAndFeelException | ReflectiveOperationException ignore) {
+
+        }
     }
 }
