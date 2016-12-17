@@ -41,6 +41,9 @@ public abstract class AbstractFrame extends JFrame {
 
     }
 
+    protected void onMenuItemClick(String command) {
+    }
+
     private class ActionListenerImpl implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -48,6 +51,8 @@ public abstract class AbstractFrame extends JFrame {
 
             if (source instanceof JButton) {
                 onButtonClick((JButton) source);
+            } else if (source instanceof JMenuItem) {
+                onMenuItemClick(e.getActionCommand());
             } else {
                 onAction(source, e.getActionCommand());
             }
@@ -75,6 +80,9 @@ public abstract class AbstractFrame extends JFrame {
 
     protected static void initLookAndFeel() {
         try {
+
+//            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Test");
+            System.setProperty("apple.laf.useScreenMenuBar", "true");
             setLookAndFeel(getSystemLookAndFeelClassName());
 //            setLookAndFeel(new NimbusLookAndFeel());
         } catch (UnsupportedLookAndFeelException | ReflectiveOperationException ignore) {

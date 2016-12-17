@@ -2,11 +2,9 @@ package com.gumeniuk.Puzzle;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Collection;
 
 public class Dashboard extends AbstractFrame {
 
@@ -17,7 +15,8 @@ public class Dashboard extends AbstractFrame {
     private static int size;
 
     Dashboard() throws HeadlessException {
-
+        setTitle("Puzzle");
+        setResizable(false);
         size = empty = GameButton.DIMENSION * GameButton.DIMENSION - 1;
         this.buttons = new ArrayList<>();
 
@@ -36,18 +35,44 @@ public class Dashboard extends AbstractFrame {
         new Dashboard().setVisible(true);
     }
 
-    @Override
-    protected void onInit() {
-        setTitle("Puzzle");
-        setLayout(null);
-        setResizable(false);
+    private Component createMenu() {
+        ActionListener listener = getActionListenerImpl();
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu file = new JMenu("File");
+
+        JMenuItem item = new JMenuItem("New game");
+        item.addActionListener(listener);
+
+        file.add(item);
+
+        JMenuItem itemExit = new JMenuItem("Exit");
+        itemExit.setAccelerator(KeyStroke.getKeyStroke("control Q"));
+        itemExit.addActionListener(listener);
+
+        file.add(itemExit);
+
+        menuBar.add(file);
+        return menuBar;
+    }
+
+    private Component createGameField() {
+        JPanel panel = new JPanel(null);
 
         int size = GameButton.size * GameButton.DIMENSION;
-        getContentPane().setPreferredSize(new Dimension(size, size));
+        panel.setPreferredSize(new Dimension(size, size));
 
         for (JButton button : buttons) {
-            add(button);
+            panel.add(button);
         }
+        return panel;
+    }
+
+    @Override
+    protected void onInit() {
+        add(createMenu(), BorderLayout.NORTH);
+
+        add(createGameField(), BorderLayout.CENTER);
         pack();
     }
 
@@ -70,5 +95,17 @@ public class Dashboard extends AbstractFrame {
             }
         }
         return true;
+    }
+
+    @Override
+    protected void onMenuItemClick(String command) {
+        switch (command) {
+            case "New game":
+                shuffle.run();
+                break;
+            case "Exit":
+                dispose();
+                break;
+        }
     }
 }
