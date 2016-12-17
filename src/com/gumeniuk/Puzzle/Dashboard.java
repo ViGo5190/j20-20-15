@@ -1,8 +1,6 @@
 package com.gumeniuk.Puzzle;
 
 import com.gumeniuk.Puzzle.Builders.MenuBarBuilder;
-import com.gumeniuk.Puzzle.Builders.MenuBuilder;
-import com.gumeniuk.Puzzle.Builders.MenuItemBuilder;
 
 import javax.swing.*;
 import java.awt.*;
