@@ -12,19 +12,22 @@ public class GameButton extends JButton {
 
     public GameButton(int index, ActionListener listener) {
         super(Integer.toString(index + 1));
-        setSize(new Dimension(size,size));
+        setSize(new Dimension(size, size));
+        setFocusable(false);
         addActionListener(listener);
         this.index = index;
         moveTo(index);
     }
 
-    public final void moveTo(int index) {
+    public final int moveTo(int index) {
+        int old = getPosition();
         setLocation(index % DIMENSION * size, index / DIMENSION * size);
+        return old;
     }
 
     private final Collection<Integer> getPossiblePosition() {
         Collection<Integer> positions = new ArrayList<>();
-        int r = getY() / size, c = getX() % size, p = r * DIMENSION + c;
+        int r = getY() / size, c = getX() / size, p = r * DIMENSION + c;
         if (r > 0) {
             positions.add(p - DIMENSION);
         }
@@ -35,7 +38,7 @@ public class GameButton extends JButton {
         if (c > 0) {
             positions.add(p - 1);
         }
-        if (c > DIMENSION - 1) {
+        if (c < DIMENSION - 1) {
             positions.add(p + 1);
         }
 
@@ -52,7 +55,7 @@ public class GameButton extends JButton {
     }
 
     public final int getPosition() {
-        return getX() / size * DIMENSION + getY() % size;
+        return getX() / size + getY() / size * DIMENSION;
     }
 
     public final boolean hasValidPosition() {

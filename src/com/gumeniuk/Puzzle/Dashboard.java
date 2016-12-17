@@ -11,6 +11,8 @@ public class Dashboard extends AbstractFrame {
 
     private final Collection<GameButton> buttons;
 
+    private int empty = 15;
+
     Dashboard() throws HeadlessException {
         this.buttons = new ArrayList<>();
 
@@ -42,6 +44,11 @@ public class Dashboard extends AbstractFrame {
     }
 
     @Override
-    protected void onButtonClick(JButton btn) {
+    protected void onButtonClick(JButton src) {
+        GameButton button = (GameButton) src;
+        if (button.canMoveTo(empty)) {
+            empty = button.moveTo(empty);
+        }
+
     }
 }
