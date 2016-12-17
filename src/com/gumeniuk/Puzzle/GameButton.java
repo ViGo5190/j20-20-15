@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class GameButton extends JButton {
-    public static final int DIMENSION = 4, size = 100;
+    public static final int DIMENSION = 4, size = 80;
     private final int index;
 
     public GameButton(int index, ActionListener listener) {

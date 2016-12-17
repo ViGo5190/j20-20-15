@@ -13,13 +13,16 @@ public class Dashboard extends AbstractFrame {
     private final List<GameButton> buttons;
     private final Runnable shuffle;
 
-    private int empty = 15;
+    private int empty;
+    private static int size;
 
     Dashboard() throws HeadlessException {
+
+        size = empty = GameButton.DIMENSION * GameButton.DIMENSION - 1;
         this.buttons = new ArrayList<>();
 
         ActionListener listener = getActionListenerImpl();
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < size; i++) {
             buttons.add(new GameButton(i, listener));
         }
 
@@ -53,7 +56,7 @@ public class Dashboard extends AbstractFrame {
         GameButton button = (GameButton) src;
         if (button.canMoveTo(empty)) {
             empty = button.moveTo(empty);
-            if (hasWin()){
+            if (hasWin()) {
                 showMessage("Congratulations", "You won!");
                 shuffle.run();
             }

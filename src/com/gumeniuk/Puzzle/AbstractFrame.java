@@ -1,6 +1,7 @@
 package com.gumeniuk.Puzzle;
 
 import javax.swing.*;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -75,8 +76,9 @@ public abstract class AbstractFrame extends JFrame {
     protected static void initLookAndFeel() {
         try {
             setLookAndFeel(getSystemLookAndFeelClassName());
+//            setLookAndFeel(new NimbusLookAndFeel());
         } catch (UnsupportedLookAndFeelException | ReflectiveOperationException ignore) {
-
+//        } catch (Exception ignore) {
         }
     }
 
